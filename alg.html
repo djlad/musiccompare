@@ -1,5 +1,5 @@
 <script>
-eNest = "http://developer.echonest.com/api/v4/song/search?api_key=VC3CO8A8XU87JBJCL&format=json&results=1&artist=radiohead&title=replay"
+eNest = "http://developer.echonest.com/api/v4/song/search?api_key=VC3CO8A8XU87JBJCL&format=json&results=1&bucket=audio_summary"
 function aReq(aUrl, handleResponse){
   var xmlhttp;
   if(window.XMLHttpRequest){
@@ -17,8 +17,10 @@ function aReq(aUrl, handleResponse){
   xmlhttp.send();
 }
 
-function getSongObject(title){
-  
+function getSongObject(title,artist){
+  aReq(eNest+"&artist="+artist+"&title="+title,function(x){q=JSON.parse(x.responseText).response.songs[0].audio_summary;console.log(x)});
 }
+
+getSongObject("replay","iyaz");
 
 </script>
